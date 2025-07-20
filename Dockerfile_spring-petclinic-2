@@ -1,0 +1,21 @@
+FROM  amazoncorretto:17.0.15-al2023-headless
+RUN mkdir petclinic
+USER nobody 
+COPY --chown=nobody:nobody /spring-petclinic/target/spring-petclinic-3.4.0-SNAPSHOT.jar  petclinic/
+WORKDIR /petclinic 
+EXPOSE 8080
+CMD ["JAVA", "-jar", "spring-petclinic-3.4.0-SNAPSHOT.jar"]
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "ping","-c", "4", "https://localhost:8080" ]
+export  DOCKER_CONTENT_TRUST=1
+
+
+
+
+
+
+
+
+
+
+
+
